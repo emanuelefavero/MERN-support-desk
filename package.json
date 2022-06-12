@@ -1,0 +1,11 @@
+{
+    "name": "mern-support-desk",
+    "version": "1.0.0",
+    "description": "ticket support MERN stack app",
+    "main": "server.js",
+    "scripts": {
+        "start": "node backend/server.js"
+    },
+    "author": "Emanuele Favero",
+    "license": "MIT"
+}
