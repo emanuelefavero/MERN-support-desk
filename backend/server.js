@@ -9,4 +9,8 @@ app.get('/', (req, res) => {
     res.status(200).json({ message: 'Welcome to the support desk API' })
 })
 
+// Routes
+// *** SINCE WE EXPORTED router INSIDE userRoutes WE CAN IMPORT router.post HERE
+app.use('/api/users', require('./routes/userRoutes'))
+
 app.listen(PORT, () => console.log(`server start on port ${PORT}`))
