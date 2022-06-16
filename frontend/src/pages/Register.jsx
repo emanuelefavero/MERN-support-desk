@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
 
+// NOTE: REDUX
+import { useSelector, useDispatch } from 'react-redux'
+import { register } from '../features/auth/authSlice'
+
 function Register() {
     const [formData, setFormData] = useState({
         name: '',
@@ -11,6 +15,15 @@ function Register() {
     })
 
     const { name, email, password, password2 } = formData
+
+    // NOTE: REDUX
+    const dispatch = useDispatch()
+
+    // get data from authSlice initialState object
+    const { user, isLoading, isSuccess, message } = useSelector(
+        // state.auth refers to authSlice = createSlice({name: 'auth', ...}) from authSlice.js
+        (state) => state.auth
+    )
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -24,6 +37,17 @@ function Register() {
 
         if (password !== password2) {
             toast.error('Passwords do not match')
+        } else {
+            // NOTE: REDUX
+            // simply create a new object with values from the formData state
+            const userData = {
+                name,
+                email,
+                password,
+            }
+
+            // call redux register method from authSlice.js
+            dispatch(register(userData))
         }
     }
 
